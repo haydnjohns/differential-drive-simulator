@@ -328,8 +328,10 @@ def main(params: RobotParameters, init: InitialConditions, movements: list, disp
         left_wheel_y = draw_axle_y + half_width * math.sin(draw_heading)
         right_wheel_x = draw_axle_x + half_width * math.cos(draw_heading)
         right_wheel_y = draw_axle_y - half_width * math.sin(draw_heading)
+        
         if display.show_grid:
             draw_grid()
+            
         if display.show_axle:
             screen_lx, screen_ly = world_to_screen(left_wheel_x, left_wheel_y)
             screen_rx, screen_ry = world_to_screen(right_wheel_x, right_wheel_y)
