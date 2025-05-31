@@ -45,8 +45,7 @@ differential-drive-simulator/
 ### 1. Clone the repository:
 
 ```bash
-git clone https://github.com/haydnjohns/differential-drive-simulator.git
-cd differential-drive-simulator
+git clone https://github.com/haydnjohns/differential-drive-simulator.git ~/differential-drive-simulator/
 ```
 
 ### 2. Create a virtual environment (optional but recommended):
