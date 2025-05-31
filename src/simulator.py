@@ -356,7 +356,7 @@ def main(params: RobotParameters, init: InitialConditions, movements: list, disp
             dx_heading = math.sin(draw_heading) * 15
             dy_heading = math.cos(draw_heading) * 15
             end_x, end_y = world_to_screen(draw_x + dx_heading, draw_y + dy_heading)
-            pygame.draw.line(screen, (0, 0, 0), (screen_robot_x, screen_robot_y), (end_x, end_y), 2)
+            pygame.draw.line(screen, (255, 255, 255), (screen_robot_x, screen_robot_y), (end_x, end_y), 2)
 
         pygame.display.flip()
 
