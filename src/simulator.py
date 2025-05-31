@@ -61,6 +61,7 @@ class DisplayOptions:
     show_turns: bool
     show_heading: bool
     show_axle: bool
+    show_grid: bool
 
 
 # [Same imports and dataclass definitions as before...]
@@ -97,6 +98,37 @@ def main(params: RobotParameters, init: InitialConditions, movements: list, disp
     scrubbing = False
     scrubbing_direction = 0
     sim_frame_index_before_scrub = 0
+
+    def draw_grid():
+        grid_spacing = 50  # grid spacing in world units (adjust as you like)
+        line_color = (100, 100, 100)  # grid line color
+
+        # Calculate grid lines in world coordinates that should appear on screen
+        # Determine min and max world coordinates visible on screen
+        left_world = scroll_x - (WIDTH / 2) / zoom
+        right_world = scroll_x + (WIDTH / 2) / zoom
+        top_world = scroll_y + (HEIGHT / 2) / zoom
+        bottom_world = scroll_y - (HEIGHT / 2) / zoom
+
+        # Start and end grid lines for vertical (x) and horizontal (y)
+        start_x = int(left_world // grid_spacing * grid_spacing)
+        end_x = int(right_world // grid_spacing * grid_spacing + grid_spacing)
+        start_y = int(bottom_world // grid_spacing * grid_spacing)
+        end_y = int(top_world // grid_spacing * grid_spacing + grid_spacing)
+
+        # Draw vertical grid lines
+        x = start_x
+        while x <= end_x:
+            sx, _ = world_to_screen(x, 0)
+            pygame.draw.line(screen, line_color, (sx, 0), (sx, HEIGHT))
+            x += grid_spacing
+
+        # Draw horizontal grid lines
+        y = start_y
+        while y <= end_y:
+            _, sy = world_to_screen(0, y)
+            pygame.draw.line(screen, line_color, (0, sy), (WIDTH, sy))
+            y += grid_spacing
 
     def world_to_screen(wx, wy):
         sx = WIDTH // 2 + (wx - scroll_x) * zoom
@@ -296,7 +328,8 @@ def main(params: RobotParameters, init: InitialConditions, movements: list, disp
         left_wheel_y = draw_axle_y + half_width * math.sin(draw_heading)
         right_wheel_x = draw_axle_x + half_width * math.cos(draw_heading)
         right_wheel_y = draw_axle_y - half_width * math.sin(draw_heading)
-
+        if display.show_grid:
+            draw_grid()
         if display.show_axle:
             screen_lx, screen_ly = world_to_screen(left_wheel_x, left_wheel_y)
             screen_rx, screen_ry = world_to_screen(right_wheel_x, right_wheel_y)
