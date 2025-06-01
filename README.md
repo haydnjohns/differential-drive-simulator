@@ -31,8 +31,10 @@ This tool provides a real-time visual interface to test movement instructions us
 differential-drive-simulator/
 │
 ├── src/
-│   ├── run_simulator.py     # Entry point for running the simulation (user inputs go here)
-│   └── simulator.py         # Simulation engine and rendering logic
+│   ├── run_simulator.py           # Entry point for running the simulation (user inputs go here)
+│   └── simulator.py               # Simulation engine and rendering logic
+├── assets/
+│   └── example_simulation.gif     # Animated gif of simulation features
 │
 ├── requirements.txt         # Python dependencies
 └── README.md                # Project documentation
